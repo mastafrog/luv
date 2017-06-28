@@ -10,12 +10,14 @@ using System.Data.Entity;
 
 namespace Luv.Models
 {
+    /*
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public partial class ProfileEntities : DbContext
     {
         public ProfileEntities() : base(nameOrConnectionString: "MyContext") { }
         public virtual DbSet<ProfileModel> Profiles { get; set; }
     }
+    */
 
 	/*protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
@@ -59,8 +61,6 @@ namespace Luv.Models
 		5,//50-60,
 		6,//70-**/
     }
-
-
 
 
     [Table("luv_users")]

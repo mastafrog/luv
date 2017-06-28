@@ -10,6 +10,6 @@ namespace Luv.Models
 		public virtual DbSet<TestClass> Tests { get; set; }
         public virtual DbSet<TestClass> Profiles { get; set; }
 
-	}
+    }
     
 }

@@ -10,20 +10,6 @@ using System.Data.Entity;
 
 namespace Luv.Models
 {
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
-	public partial class TestContext : DbContext
-	{
-		public TestContext() : base(nameOrConnectionString: "MyContext") { }
-		public virtual DbSet<TestClass> Tests { get; set; }
-	}
-
-
-
-	/*protected override void OnModelCreating(DbModelBuilder modelBuilder)
-	{
-
-	}*/
-
 	[Table("test")]
     public class TestClass
     {

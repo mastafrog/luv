@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Luv.Models;
+using Newtonsoft.Json;
 
 namespace Luv.Controllers
 {
@@ -19,30 +20,42 @@ namespace Luv.Controllers
 			public decimal  Price { get; set; }
 		}
 
-        public MysqlContext context = new MysqlContext();
-
-		public List<Profile> profiles = new List<Profile>
+        public static MysqlContext context = new MysqlContext();
+                                  
+	/*	
+	    public List<Profile> profiles = new List<Profile>
 		{
 			new Profile { Id = 1, Name = "Tomato Soup"},
 			new Profile { Id = 2, Name = "Yo-yo"},
 			new Profile { Id = 3, Name = "Hammer"}
 		};
+	*/
 
        // [System.Web.Http.RoutePrefix("api")]
-        public ProfilesController(){
+
+        public ProfilesController() 
+        {
 		//	var ctx = new testContext();
 		//	var test = new TestClass() { Name = "Blub blup test" };
         }
 
-		public IEnumerable<Profile> Get()
+        public String /*IEnumerable<TestClass>*/ Get()
 		{
-			return profiles;
+           
+           var blup = context.Tests.Find();
+
+			return Newtonsoft.Json.JsonConvert.SerializeObject( 
+                       blup, 
+                       Formatting.Indented, 
+                       new JsonSerializerSettings { 
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
+                    });
 		}
 
-
 		//public IHttpActionResult Get(int id)
-		public IHttpActionResult Get(int id)
+		/*public IHttpActionResult Get(int id)
 		{
+            
 			var profile = profiles.FirstOrDefault((p) => p.Id == id);
 			if (profile == null)
 			{
@@ -50,15 +63,17 @@ namespace Luv.Controllers
 			}
 			profile.Name = "From here";
 			return Ok(profile);
-		}
+		}*/
 
 		// POST api/person
 
-		public HttpResponseMessage Post([FromBody]Profile value)
+		public void /*HttpResponseMessage*/ Post([FromBody]Profile value)
 		{
-            profiles.Add(new Profile() { Id = 9, Name = "Blabla" });
+            /*
+            var profiles.Add(new Profile() { Id = 9, Name = "Blabla" });
             HttpResponseMessage response = Request.CreateResponse("Blabla message" + profiles.ToString());
 			return response;
+			*/
 			//    new Profile { Id = 1, Name = "Tomato Soup" };
 		}
 
@@ -71,7 +86,7 @@ namespace Luv.Controllers
 		// DELETE api/person/5
 		public void Delete(int id)
 		{
-			profiles.Add(new Profile { Id = 4, Name = "Blabla" });
+			//profiles.Add(new Profile { Id = 4, Name = "Blabla" });
 			//  profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id));
 			/*
             if (profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id)))
