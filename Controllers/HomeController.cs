@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using Test01.Models;
+using Luv.Models;
 
-namespace Test01.Controllers
+namespace Luv.Controllers
 {
     public partial class HomeController : Controller
     {

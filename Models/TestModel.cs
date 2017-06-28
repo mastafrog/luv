@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-namespace Test01.Models
+namespace Luv.Models
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
 	public partial class TestContext : DbContext

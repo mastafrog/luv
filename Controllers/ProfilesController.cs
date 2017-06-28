@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using Test01.Models;
 using System.Web.Http.Results;
+using Luv.Models;
 
-namespace Test01.Controllers
+namespace Luv.Controllers
 {
     public class ProfilesController : ApiController
     {
@@ -19,7 +19,7 @@ namespace Test01.Controllers
 			public decimal  Price { get; set; }
 		}
 
-        public context = new TestContext();
+        public MysqlContext context = new MysqlContext();
 
 		public List<Profile> profiles = new List<Profile>
 		{
@@ -30,8 +30,8 @@ namespace Test01.Controllers
 
        // [System.Web.Http.RoutePrefix("api")]
         public ProfilesController(){
-			var ctx = new testContext();
-			var test = new TestClass() { Name = "Blub blup test" };
+		//	var ctx = new testContext();
+		//	var test = new TestClass() { Name = "Blub blup test" };
         }
 
 		public IEnumerable<Profile> Get()

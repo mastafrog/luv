@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Test01
+namespace Luv
 {
     public static class WebApiConfig
     {
