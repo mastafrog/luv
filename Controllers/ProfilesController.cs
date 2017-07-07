@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
@@ -21,7 +22,7 @@ namespace Luv.Controllers
             public decimal  Price { get; set; }
         }
 
-        public static MysqlContext context = new MysqlContext();
+        public static MysqlContext Context = new MysqlContext();
                                   
     /*    
         public List<Profile> profiles = new List<Profile>
@@ -43,7 +44,7 @@ namespace Luv.Controllers
         public String /*IEnumerable<TestClass>*/ Get()
         {
 
-            var blup = context.Tests.ToList();//SingleOrDefault();//.Find();
+            var blup = Context.Tests.ToList();//SingleOrDefault();//.Find();
 
             /*   return Newtonsoft.Json.JsonConvert.SerializeObject( 
                            blup, 
@@ -57,7 +58,7 @@ namespace Luv.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            var profile = context.Tests.SingleOrDefault(TestModel => TestModel.Id == id);
+            var profile = Context.Tests.SingleOrDefault(TestModel => TestModel.Id == id);
             if (profile == null)
             {
                 return NotFound();
@@ -65,8 +66,26 @@ namespace Luv.Controllers
             return Ok(JsonConvert.SerializeObject(profile));
         }
 
-        // POST api/person
-        public void /*HttpResponseMessage*/ Post([FromBody]Profile value)
+    /*
+    ---> hier gehts weiter
+    https://stackoverflow.com/questions/31022668/how-to-receive-json-data-on-webapi-backend-c
+
+    https://tools.ietf.org/html/rfc7231#section-4.3
+
+    Debug.WriteLine(data.Type);
+    Debug.WriteLine(data.Id);
+
+
+    */
+
+		[HttpPost]
+		public bool AddOrder([FromBody] PurchaseOrder order)
+		{
+		}
+
+
+		// POST api/person
+		public void /*HttpResponseMessage*/ Post([FromBody]Profile value)
         {
             /*
             var profiles.Add(new Profile() { Id = 9, Name = "Blabla" });
@@ -77,27 +96,30 @@ namespace Luv.Controllers
         }
 
         // PUT api/person/5
-        public void Put(int id, [FromBody]Profile value) {
-            
-        //    db.Entry(MyNewObject).GetDatabaseValues();
-        }
-
-
-        // DELETE api/person/5
-        public void Delete(int id)
+        [HttpPut]
+        public void Put(int id, [FromBody]Profile value) 
         {
-            //profiles.Add(new Profile { Id = 4, Name = "Blabla" });
-            //  profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id));
-            /*
-            if (profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id)))
-            {
-                return Ok();
-            }
-            else {
-                return NotFound();
-            }
-            */
+            
+            
         }
+
+
+		// DELETE api/person/5
+		// TODO return something like esponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError
+		public void Delete(int id)
+        {
+            var itemToRemove = Context.Tests.SingleOrDefault(x => x.Id == id); //returns a single item.
+         //   var response = new HttpStatusCode();
+
+            if (itemToRemove != null) {
+                Context.Tests.Remove(itemToRemove);
+                Context.SaveChanges();
+            } else {
+				
+			}
+		}
+
+
     }
 }
 
