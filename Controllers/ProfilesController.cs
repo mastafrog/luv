@@ -12,83 +12,83 @@ namespace Luv.Controllers
 {
     public class ProfilesController : ApiController
     {
-		public class Profile
-		{
-			public int      Id { get; set; }
-			public string   Name { get; set; }
-			public string   Category { get; set; }
-			public decimal  Price { get; set; }
-		}
+        
+        public class Profile
+        {
+            public int      Id { get; set; }
+            public string   Name { get; set; }
+            public string   Category { get; set; }
+            public decimal  Price { get; set; }
+        }
 
         public static MysqlContext context = new MysqlContext();
                                   
-	/*	
-	    public List<Profile> profiles = new List<Profile>
-		{
-			new Profile { Id = 1, Name = "Tomato Soup"},
-			new Profile { Id = 2, Name = "Yo-yo"},
-			new Profile { Id = 3, Name = "Hammer"}
-		};
-	*/
+    /*    
+        public List<Profile> profiles = new List<Profile>
+        {
+            new Profile { Id = 1, Name = "Tomato Soup"},
+            new Profile { Id = 2, Name = "Yo-yo"},
+            new Profile { Id = 3, Name = "Hammer"}
+        };
+    */
 
        // [System.Web.Http.RoutePrefix("api")]
 
         public ProfilesController() 
         {
-		//	var ctx = new testContext();
-		//	var test = new TestClass() { Name = "Blub blup test" };
+        //    var ctx = new testContext();
+        //    var test = new TestClass() { Name = "Blub blup test" };
         }
 
         public String /*IEnumerable<TestClass>*/ Get()
-		{
-           
-           var blup = context.Tests.Find();
+        {
 
-			return Newtonsoft.Json.JsonConvert.SerializeObject( 
-                       blup, 
-                       Formatting.Indented, 
-                       new JsonSerializerSettings { 
-                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
-                    });
-		}
+            var blup = context.Tests.ToList();//SingleOrDefault();//.Find();
 
-		//public IHttpActionResult Get(int id)
-		/*public IHttpActionResult Get(int id)
-		{
-            
-			var profile = profiles.FirstOrDefault((p) => p.Id == id);
-			if (profile == null)
-			{
-				return NotFound();
-			}
-			profile.Name = "From here";
-			return Ok(profile);
-		}*/
+            /*   return Newtonsoft.Json.JsonConvert.SerializeObject( 
+                           blup, 
+                           Formatting.Indented, 
+                           new JsonSerializerSettings { 
+                           ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
+                        });*/
+            var json = JsonConvert.SerializeObject(blup);
+            return json;
+        }
 
-		// POST api/person
+        public IHttpActionResult Get(int id)
+        {
+            var profile = context.Tests.SingleOrDefault(TestModel => TestModel.Id == id);
+            if (profile == null)
+            {
+                return NotFound();
+            }
+            return Ok(JsonConvert.SerializeObject(profile));
+        }
 
-		public void /*HttpResponseMessage*/ Post([FromBody]Profile value)
-		{
+        // POST api/person
+        public void /*HttpResponseMessage*/ Post([FromBody]Profile value)
+        {
             /*
             var profiles.Add(new Profile() { Id = 9, Name = "Blabla" });
             HttpResponseMessage response = Request.CreateResponse("Blabla message" + profiles.ToString());
-			return response;
-			*/
-			//    new Profile { Id = 1, Name = "Tomato Soup" };
-		}
+            return response;
+            */
+            //    new Profile { Id = 1, Name = "Tomato Soup" };
+        }
 
-		// PUT api/person/5
-		public void Put(int id, [FromBody]Profile value) { 
+        // PUT api/person/5
+        public void Put(int id, [FromBody]Profile value) {
+            
         //    db.Entry(MyNewObject).GetDatabaseValues();
         }
 
 
-		// DELETE api/person/5
-		public void Delete(int id)
-		{
-			//profiles.Add(new Profile { Id = 4, Name = "Blabla" });
-			//  profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id));
-			/*
+        // DELETE api/person/5
+        public void Delete(int id)
+        {
+            //profiles.Add(new Profile { Id = 4, Name = "Blabla" });
+            //  profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id));
+            /*
             if (profiles.Remove(profiles.FirstOrDefault((p) => p.Id == id)))
             {
                 return Ok();
@@ -97,7 +97,7 @@ namespace Luv.Controllers
                 return NotFound();
             }
             */
-		}
+        }
     }
 }
 
@@ -114,4 +114,9 @@ http://www.thinkprogramming.co.uk/code-first-with-mysql-and-entity-framework-6/
 https://www.ntchosting.com/encyclopedia/databases/mysql/insert-date/
 https://andrewlock.net/adding-ef-core-to-a-project-on-os-x/
 http://www.entityframeworktutorial.net/EntityFramework4.3/dbcontext-vs-objectcontext.aspx
+*/
+
+/*
+ * anonyme type context response
+ * https://stackoverflow.com/questions/657939/serialize-entity-framework-objects-into-json
 */

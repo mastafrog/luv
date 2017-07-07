@@ -11,10 +11,11 @@ using System.Data.Entity;
 namespace Luv.Models
 {
 	[Table("test")]
-    public class TestClass
+    public class TestModel
     {
-		[Key]
-		[Column("id")]
+		//[Key]
+        [Index]
+		[Column("id")] 
 		public int Id { get; set; }
 		[Column("name")]
 		public string Name { get; set; }
