@@ -66,6 +66,34 @@ namespace Luv.Controllers
             return Ok(JsonConvert.SerializeObject(profile));
         }
 
+
+
+        // POST api/person
+        public IHttpActionResult /*HttpResponseMessage*/ Post([FromBody] int id, [FromBody] string name)
+        {
+            Profile fck = new Profile();
+            fck.Name = "xfkjfhdskjf";
+            fck.Id = 12;
+
+            return Ok(JsonConvert.SerializeObject(fck));
+
+
+            //    Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject( fck ) );
+            /*
+            var profiles.Add(new Profile() { Id = 9, Name = "Blabla" });
+            HttpResponseMessage response = Request.CreateResponse("Blabla message" + profiles.ToString());
+            return response;
+            */
+            //    new Profile { Id = 1, Name = "Tomato Soup" };
+        }
+
+
+        // PUT api/person/5
+        public HttpResponseMessage Put(/*int id,*/ [FromBody]Profile value) 
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(value));
+        }
+
     /*
     ---> hier gehts weiter
     https://stackoverflow.com/questions/31022668/how-to-receive-json-data-on-webapi-backend-c
@@ -78,31 +106,12 @@ namespace Luv.Controllers
 
     */
 
-		[HttpPost]
+		/*[HttpPost]
 		public bool AddOrder([FromBody] PurchaseOrder order)
 		{
-		}
-
-
-		// POST api/person
-		public void /*HttpResponseMessage*/ Post([FromBody]Profile value)
-        {
-            /*
-            var profiles.Add(new Profile() { Id = 9, Name = "Blabla" });
-            HttpResponseMessage response = Request.CreateResponse("Blabla message" + profiles.ToString());
-            return response;
-            */
-            //    new Profile { Id = 1, Name = "Tomato Soup" };
-        }
-
-        // PUT api/person/5
-        [HttpPut]
-        public void Put(int id, [FromBody]Profile value) 
-        {
             
-            
-        }
-
+		}*/
+        
 
 		// DELETE api/person/5
 		// TODO return something like esponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError
