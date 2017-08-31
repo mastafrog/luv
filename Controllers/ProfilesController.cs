@@ -8,12 +8,17 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using Luv.Models;
 using Newtonsoft.Json;
+using System.Web.Http.Tracing;
+
+// using Luv.Filters;
+// using BasicAuthentication.Models;
 
 namespace Luv.Controllers
 {
     public class ProfilesController : ApiController
     {
-        
+	//	[IdentityBasicAuthentication] // Enable Basic authentication for this controller.
+	//	[Authorize]
         public class Profile
         {
             public int      Id { get; set; }
@@ -37,23 +42,26 @@ namespace Luv.Controllers
 
         public ProfilesController() 
         {
-        //    var ctx = new testContext();
-        //    var test = new TestClass() { Name = "Blub blup test" };
-        }
+		    //	Configuration.Services.GetTraceWriter().Info( Request, "ProductsController", "Get the list of products.");
+
+			//  var ctx = new testContext();
+			//  var test = new TestClass() { Name = "Blub blup test" };
+		}
+
 
         public String /*IEnumerable<TestClass>*/ Get()
         {
-
             var blup = Context.Tests.ToList();//SingleOrDefault();//.Find();
-
-            /*   return Newtonsoft.Json.JsonConvert.SerializeObject( 
-                           blup, 
-                           Formatting.Indented, 
-                           new JsonSerializerSettings { 
-                           ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
-                        });*/
+            /*  return Newtonsoft.Json.JsonConvert.SerializeObject( 
+                       blup, 
+                       Formatting.Indented, 
+                       new JsonSerializerSettings { 
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
+                    });*/
+            
             var json = JsonConvert.SerializeObject(blup);
-            return json;
+            // return json;
+            return "public ProfilesController() ";
         }
 
         public IHttpActionResult Get(int id)
@@ -67,15 +75,14 @@ namespace Luv.Controllers
         }
 
 
-
         // POST api/person
-        public IHttpActionResult /*HttpResponseMessage*/ Post([FromBody] int id, [FromBody] string name)
+        public IHttpActionResult /*HttpResponseMessage*/ Post([FromBody]Profile value)
         {
-            Profile fck = new Profile();
+        /*  Profile fck = new Profile();
             fck.Name = "xfkjfhdskjf";
             fck.Id = 12;
-
-            return Ok(JsonConvert.SerializeObject(fck));
+        */
+            return Ok(JsonConvert.SerializeObject(value));
 
 
             //    Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject( fck ) );

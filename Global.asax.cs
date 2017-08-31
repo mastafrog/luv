@@ -10,7 +10,7 @@ namespace Luv
     {
         protected void Application_Start()
         {
-         //   DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
+         // DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
