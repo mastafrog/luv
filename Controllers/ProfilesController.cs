@@ -10,15 +10,11 @@ using Luv.Models;
 using Newtonsoft.Json;
 using System.Web.Http.Tracing;
 
-// using Luv.Filters;
-// using BasicAuthentication.Models;
-
 namespace Luv.Controllers
 {
     public class ProfilesController : ApiController
     {
-	//	[IdentityBasicAuthentication] // Enable Basic authentication for this controller.
-	//	[Authorize]
+
         public class Profile
         {
             public int      Id { get; set; }
@@ -28,29 +24,23 @@ namespace Luv.Controllers
         }
 
         public static MysqlContext Context = new MysqlContext();
-                                  
-    /*    
-        public List<Profile> profiles = new List<Profile>
+
+
+     /*   public ProfilesController() 
         {
-            new Profile { Id = 1, Name = "Tomato Soup"},
-            new Profile { Id = 2, Name = "Yo-yo"},
-            new Profile { Id = 3, Name = "Hammer"}
-        };
-    */
 
-       // [System.Web.Http.RoutePrefix("api")]
-
-        public ProfilesController() 
-        {
-		    //	Configuration.Services.GetTraceWriter().Info( Request, "ProductsController", "Get the list of products.");
-
-			//  var ctx = new testContext();
-			//  var test = new TestClass() { Name = "Blub blup test" };
 		}
+	 */
 
 
-        public String /*IEnumerable<TestClass>*/ Get()
+
+
+        [Route("api/profiles")]
+        [HttpPost]
+        public IHttpActionResult GetProfiles()
         {
+            // IEnumerable
+            var profiles = new ProfileModel()
             var blup = Context.Tests.ToList();//SingleOrDefault();//.Find();
             /*  return Newtonsoft.Json.JsonConvert.SerializeObject( 
                        blup, 
@@ -60,13 +50,17 @@ namespace Luv.Controllers
                     });*/
             
             var json = JsonConvert.SerializeObject(blup);
-            // return json;
-            return "public ProfilesController() ";
+            return Ok(json);
         }
+        // Works! https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2"
 
-        public IHttpActionResult Get(int id)
+
+
+
+        [Route("api/profile/{profileId}")]
+        public IHttpActionResult Get(int profileId)
         {
-            var profile = Context.Tests.SingleOrDefault(TestModel => TestModel.Id == id);
+            var profile = Context.Tests.SingleOrDefault(TestModel => TestModel.Id == profileId);
             if (profile == null)
             {
                 return NotFound();
@@ -122,7 +116,7 @@ namespace Luv.Controllers
 
 		// DELETE api/person/5
 		// TODO return something like esponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError
-		public void Delete(int id)
+		/*public void Delete(int id)
         {
             var itemToRemove = Context.Tests.SingleOrDefault(x => x.Id == id); //returns a single item.
          //   var response = new HttpStatusCode();
@@ -133,7 +127,7 @@ namespace Luv.Controllers
             } else {
 				
 			}
-		}
+		}*/
 
 
     }
