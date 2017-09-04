@@ -17,10 +17,10 @@ namespace Luv.Controllers
 
         public class Profile
         {
-            public int      Id { get; set; }
-            public string   Name { get; set; }
-            public string   Category { get; set; }
-            public decimal  Price { get; set; }
+          //  public int      Id { get; set; }
+          //  public string   Name { get; set; }
+          //  public string   Category { get; set; }
+          //  public decimal  Price { get; set; }
         }
 
         public static MysqlContext Context = new MysqlContext();
@@ -41,16 +41,18 @@ namespace Luv.Controllers
         {
             // IEnumerable
             var profiles = new ProfileModel();
-            var blup = Context.Tests.ToList();//SingleOrDefault();//.Find();
-            /*  return Newtonsoft.Json.JsonConvert.SerializeObject( 
-                       blup, 
-                       Formatting.Indented, 
-                       new JsonSerializerSettings { 
-                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
-                    });*/
+            var blup = Context.Profiles.ToList();//SingleOrDefault();//.Find();
+        /*    var json = Newtonsoft.Json.JsonConvert.SerializeObject( 
+                           blup, 
+                           Formatting.Indented, 
+                           new JsonSerializerSettings { 
+                           ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
+                        });
+                        */
+
             
             var json = JsonConvert.SerializeObject(blup);
-            return Ok(json);
+            return Ok( json );
         }
 
 
@@ -75,8 +77,9 @@ namespace Luv.Controllers
 
 
         // GET Profile
-        [Route("api/profile/{profileId}")]
-        public IHttpActionResult Get(int profileId)
+        [Route("api/profile")]
+        [HttpGet]
+        public IHttpActionResult GetProfile(int profileId)
         {
             var profile = Context.Tests.SingleOrDefault(TestModel => TestModel.Id == profileId);
             if (profile == null)
@@ -87,6 +90,61 @@ namespace Luv.Controllers
             return Ok("look at this face! its a" + profileId);
         }
 
+
+
+
+        /// <summary>
+        /// Hier genauer 
+        /// https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
+        /// </summary>
+        /// <returns>The profile.</returns>
+
+
+        // PUT Profile
+        [Route("api/profile")]
+        [HttpPut]
+        public IHttpActionResult InsertProfile()
+        {
+            Random r = new Random();
+
+            var profile = new ProfileModel();
+            profile.Name = "Name";
+            profile.Mail = "Mailmail@yahoo.de";
+            profile.Birtday = DateTime.Now.AddDays(-365.25);
+            profile.Password = profile.Name;                    //TODO Aouth2 Implementieren at least direct
+            profile.Gender = 18;                             // TODO Ab jetzt nach unten
+            profile.Descr = "Trulala";
+            profile.Userpic = 12;
+            profile.Images = 4;
+            profile.Hobbies = "essen, schleißen";
+
+            profile.Signed = DateTime.Now.AddDays(-(r.Next(10, 356 * 4)));    // 4 Yahre                  //DateTime.Now.AddDays( -(r * 665.25)); }
+            profile.Active = 1;
+
+            profile.Lastlogin = DateTime.Now.AddDays(-(r.Next(1, 40)));
+
+            profile.Req_relation = r.Next(0, 4);
+            profile.Req_gender = r.Next(0, 4);
+            profile.Req_age = r.Next(1, 4);
+
+
+            Context.Profiles.Add(profile);  //AddOrUpdate
+            Context.SaveChanges();
+            /*
+            Context.Tests.SingleOrDefault(T estModel => TestModel.Id == profileId);
+            if (profile == null)
+            {
+                return NotFound();
+            }
+            */
+
+            // return Ok(JsonConvert.SerializeObject(profile));
+            //      return Ok("look at this face! its a" + profileId);
+
+            return Ok(JsonConvert.SerializeObject(profile));
+
+
+        }
 
 
         // POST api/person

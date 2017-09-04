@@ -19,48 +19,70 @@ namespace Luv.Models
     }
     */
 
-	/*protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
 
     }*/
 
-	// Enums
+    // Enums
 
-    public enum enum_gender
+    /*
+    public enum enum_genders
     {
-		none,
-		male,
-		female,
-		transgender,
-		cisgender
+		none = 0,
+		male = 1,
+		female = 2,
+		transgender = 3,
+		cisgender = 4
     }
+
+
+    Simpler Version 
+        none = 0,
+        male = 1,
+        female = 2,
+
 
     public enum req_relation 
     {
-        all, 
-        friendship, 
-        sex, 
-        longterm
+        all = 0, 
+        friendship = 1,
+        sex = 2, 
+        longterm = 3
     }
+
+
+// Basic ; 
+    none = 0,
+    alle = 5,
+    male = 1,
+    female = 2,
+
 
     public enum enum_req_gender {
-        all,
-        male,
-        female,
-        transgender,
-        cisgender
+        none = 0,
+        alle = 5,
+        male = 1,
+        female = 2,
+        transgender = 3,
+        cisgender = 4
     }
-   
+
+
+
+
 
 	public enum req_age {
-	/*	all,
-		1, //18-24,
-		2, //24-32,
-		3, //32-40,
-		4,//40-50,
-		5,//50-60,
-		6,//70-**/
+	//	0 = undefined
+	    1 = all
+	//	1, //18-24,
+	//	2, //24-32,
+	//	3, //32-40,
+	//	4,//40-50,
+	//	5, //50-60,
+	//	6, //70... 
     }
+   */
 
 
     [Table("luv_users")]
@@ -77,43 +99,44 @@ namespace Luv.Models
 		public string Mail { get; set; }
 
 		[Column("birthday")]
-		public DateTime Birtday { get; set; }           // = DateTime.Now;  
+		public DateTime Birtday { get; set; }          
 	
         [Column("password")]
         public string Password { get; set; }
 
-		[Column("gender")] 
-        public enum_gender Gender { get; set; }
+       	[Column("gender")] 
+        public int Gender { get; set; }
 
-		[Column("descr")]
-        public int Descr { get; set; }
+        [Column("descr")]
+        public string Descr { get; set; }
 
-		[Column("userpic")]
+        [Column("userpic")]
         public int Userpic { get; set; }
 
-		[Column("images")]
+        [Column("images")]
         public int Images { get; set; }
 
-		[Column("hobbies")]
-        public int Hobbies { get; set; }
+        [Column("hobbies")]
+        public string Hobbies { get; set; }
 
-		[Column("signed")]
-        public int Signed { get; set; }
+        [Column("signed")]
+          public DateTime Signed { get; set; }
 
-		[Column("active")]
-        public int Active { get; set; }
+        [Column("active")]
+         public int Active { get; set; }
 
-		[Column("lastlogin")]
-        public int Lastlogin { get; set; }
+        [Column("lastlogin")]
+         public DateTime Lastlogin { get; set; }
+          
+        [Column("req_relation")]
+        public int Req_relation { get; set; }
 
-		[Column("req_relation")]
-        public req_relation Req_relation { get; set; }
+        [Column("req_gender")]
+        public int Req_gender { get; set; }
 
-		[Column("req_gender")]
-        public enum_req_gender Req_gender { get; set; }
-
-		[Column("req_age")]
+        [Column("req_age")]
         public int Req_age { get; set; }
 
-	}
+    }
+
 }
