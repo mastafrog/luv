@@ -40,7 +40,7 @@ namespace Luv.Controllers
         public IHttpActionResult GetProfiles()
         {
             // IEnumerable
-            var profiles = new ProfileModel()
+            var profiles = new ProfileModel();
             var blup = Context.Tests.ToList();//SingleOrDefault();//.Find();
             /*  return Newtonsoft.Json.JsonConvert.SerializeObject( 
                        blup, 
