@@ -52,11 +52,29 @@ namespace Luv.Controllers
             var json = JsonConvert.SerializeObject(blup);
             return Ok(json);
         }
-        // Works! https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2"
 
 
+        // Get Profiles with Pagination
+        [Route("api/profiles/{skipNr}")]
+        [HttpPost]
+        public IHttpActionResult GetProfiles(int skipNr)
+        {
+            // IEnumerable
+            var profiles = new ProfileModel();
+            var blup = Context.Tests.ToList();//SingleOrDefault();//.Find();
+                                              /*  return Newtonsoft.Json.JsonConvert.SerializeObject( 
+                                                         blup, 
+                                                         Formatting.Indented, 
+                                                         new JsonSerializerSettings { 
+                                                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
+                                                      });*/
+
+           // var json = JsonConvert.SerializeObject(blup);
+            return Ok("You have send "+ skipNr);
+        }
 
 
+        // GET Profile
         [Route("api/profile/{profileId}")]
         public IHttpActionResult Get(int profileId)
         {
@@ -65,8 +83,10 @@ namespace Luv.Controllers
             {
                 return NotFound();
             }
-            return Ok(JsonConvert.SerializeObject(profile));
+            // return Ok(JsonConvert.SerializeObject(profile));
+            return Ok("look at this face! its a" + profileId);
         }
+
 
 
         // POST api/person
