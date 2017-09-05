@@ -161,6 +161,25 @@
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="ClientApp\.eslintrc.js" />
+    <Content Include="ClientApp\.postcssrc.js" />
+    <Content Include="ClientApp\index.html" />
+    <Content Include="ClientApp\config\dev.env.js" />
+    <Content Include="ClientApp\config\index.js" />
+    <Content Include="ClientApp\config\prod.env.js" />
+    <Content Include="ClientApp\src\main.js" />
+    <Content Include="ClientApp\src\assets\logo.png" />
+    <Content Include="ClientApp\src\router\index.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClientApp\.babelrc" />
+    <None Include="ClientApp\.editorconfig" />
+    <None Include="ClientApp\.eslintignore" />
+    <None Include="ClientApp\.gitignore" />
+    <None Include="ClientApp\package.json" />
+    <None Include="ClientApp\src\App.vue" />
+    <None Include="ClientApp\src\components\Hello.vue" />
+    <None Include="ClientApp\static\.gitkeep" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

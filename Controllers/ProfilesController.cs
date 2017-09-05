@@ -32,9 +32,6 @@ namespace Luv.Controllers
 		}
 	 */
 
-
-
-
         [Route("api/profiles")]
         [HttpPost]
         public IHttpActionResult GetProfiles()
@@ -216,7 +213,7 @@ namespace Luv.Controllers
  * INSERT INTO `luv_users` (`uid`, `username`, `mail`, `birthday`, `password`, `gender`, `descr`, `userpic`, `images`, `hobbies`, `signed`, `active`, `lastlogin`, `req_relation`, `req_gender`, `req_age`) VALUES (NULL, 'Chubaka', 'Chubaka@gmail.com', '1982-06-06', 'qwertz', 'cisgender', 'Lorem blup ', '2', '1,2,3,4', 'qw,qwe,er,sdf,dg,wer', '2017-06-22', '1', '2017-06-22', 'all', 'all', 'all');
 */
 /*
- * 
+
 https://github.com/alisabzevari/LiteApi * 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
 http://www.tablesgenerator.com/markdown_tables

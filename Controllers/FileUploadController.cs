@@ -10,6 +10,12 @@ using Luv.Extensions;
 
 namespace Luv.Controllers
 {
+    /*
+    http://127.0.0.1:9000/api/upload
+    content-type: application/x-www-form-urlencoded
+    TODO 500 At no File Attached
+    */
+
     [System.Web.Http.RoutePrefix("api")]
     public class FileUploadController : ApiController
     {
@@ -18,12 +24,13 @@ namespace Luv.Controllers
 		[System.Web.Http.HttpPost]
 		public async Task<HttpResponseMessage> UploadFile(HttpRequestMessage request)
 		{
+            var data = await Request.Content.ParseMultipartAsync();
+
 			if (!request.Content.IsMimeMultipartContent())
 			{
 				throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 			}
 
-			var data = await Request.Content.ParseMultipartAsync();
 
 			if (data.Files.ContainsKey("file"))
 			{
