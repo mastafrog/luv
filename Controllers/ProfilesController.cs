@@ -109,7 +109,7 @@ namespace Luv.Controllers
             profile.Mail = "Mailmail@yahoo.de";
             profile.Birtday = DateTime.Now.AddDays(-365.25);
             profile.Password = profile.Name;                    //TODO Aouth2 Implementieren at least direct
-            profile.Gender = 18;                             // TODO Ab jetzt nach unten
+            profile.Gender = 18;                                // TODO Ab jetzt nach unten
             profile.Descr = "Trulala";
             profile.Userpic = 12;
             profile.Images = 4;
